@@ -4,11 +4,12 @@ const N = 30;
 let container = document.getElementsByClassName('container')[0]; // returns div.container object
 let height = document.body.clientHeight * .85; // calculates 85% of body's height
 let width = document.body.clientWidth;  // gets body's width
-let	heightCalc = height / N;
-let	widthCalc = width / N; 
+let	widthCalc = width / N;
+let rowCount = Math.floor(height / widthCalc); // Calculates amount of rows based on initial widthCalc
+let	heightCalc = widthCalc; // At first, heightCalc is the same as widthCalc
 // Formatting of strings to pass as CSS value
 let colWidth = `repeat(${N}, ${widthCalc}px)`;  
-let rowHeight = `repeat(${N}, ${heightCalc}px)`;
+let rowHeight = `repeat(${rowCount}, ${heightCalc}px)`;
 
 // Cell object 
 class Cell {
@@ -25,16 +26,16 @@ function setup() {
 	height = document.body.clientHeight * .85;
 	width = document.body.clientWidth;
 	// Calculates respective values
-	heightCalc = height / N;
-	widthCalc = width / N; 
+	widthCalc = width / N;
+	heightCalc = height / rowCount; // When resized, the height of cells should be resized
 	// Formats the strings
 	colWidth = `repeat(${N}, ${widthCalc}px)`; 
-	rowHeight = `repeat(${N}, ${heightCalc}px)`;
+	rowHeight = `repeat(${rowCount}, ${heightCalc}px)`;
 	// Updates column and row sizes
 	container.style.gridTemplateColumns = colWidth;
 	container.style.gridTemplateRows = rowHeight;
 	// Updates HEIGHT and WIDTH to EACH cell.
-	for(let i=0; i < N ** 2; i++) {
+	for(let i=0; i < N * rowCount; i++) {
 		cellArray[i].element.style.height = heightCalc;
 		cellArray[i].element.style.width = widthCalc;
 	}	
@@ -46,7 +47,7 @@ container.style.gridTemplateRows = rowHeight;
 
 // Creates Cell Array containing all Cell objects
 let cellArray = [];
-for(let i=0;i < N; i++){
+for(let i=0;i < rowCount; i++){
 	for(let j=0;j < N; j++) {
 		let temp = document.createElement('div'); // Creates div element
 		temp.setAttribute('class', 'cell'); // Sets class to 'cell'
