@@ -1,0 +1,25 @@
+* {
+	font-family:  Roboto, Open-Sans;
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+}
+.title-container {
+	height: 15%;
+	margin: auto;
+	text-align: center;
+}
+.container {
+	height: 85%;
+	display: grid;
+}
+.cell {
+	background-color: white;
+	box-sizing: border-box;
+	border: 1px solid rgb(0, 0, 100);
+	transition: all 0.2s ease-out;
+	row-gap: 0px;
+	column-gap: 0px;
+	margin: 0;
+}
